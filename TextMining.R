@@ -1,5 +1,6 @@
 install.packages("tm")
 library(tm)
+options(header=FALSE,stringasfactors = FALSE,FileEncoding = "latin1")
 dataset <- readLines("TMwithR.txt") 
 dataset
 names(dataset)
@@ -17,7 +18,7 @@ inspect(mycorpus[3])
 inspect(mycorpus[4])
 inspect(mycorpus[5])
 inspect(mycorpus[8])
-mycorpus[8]
+mycorpus[8] 
 #
 mycorpus = tm_map(mycorpus, tolower)
 inspect(mycorpus[8])
