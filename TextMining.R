@@ -22,7 +22,7 @@ mycorpus[8]
 #
 stopwords("en")
 
-mycorpus = tm_map(mycorpus,removeWords, stopwords('english'))
+dataclean = tm_map(mycorpus,removeWords, stopwords('english'))
 mycorpus = tm_map(mycorpus,content_transformer(function(x) iconv(x, to='UTF8', sub='byte')))
 inspect(mycorpus[8])
 mycorpus=tm_map(mycorpus, removePunctuation)
@@ -31,4 +31,14 @@ mycorpus=tm_map(mycorpus,removeNumbers)
 mycorpus = tm_map(mycorpus, tolower)
 inspect(mycorpus[8])
 inspect(dataclean[8])
-dataset <- tm_map(dataset, stripWhitespace)
+mycorpus <- tm_map(mycorpus, stripWhitespace)
+dtm=TermDocumentMatrix(mycorpus, control = list(minWordLength=c(1,Inf)))
+findFreqTerms(dtm,lowfreq =2)
+as.matrix(dtm)
+termFrequency = rowSums(as.matrix(dtm))
+termFrequency
+termFrequency=subset(termFrequency, termFrequency>=15)
+termFrequency
+#las makes the lables perpendicular to axix rainbow is color 
+barplot(termFrequency, las=2,col=rainbow(20))
+
